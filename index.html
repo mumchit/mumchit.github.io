@@ -3,8 +3,57 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>멈칫</title>
-<meta name="description" content="멈칫 — 사진으로 남기는 소비 기록. 이용약관과 개인정보처리방침.">
+<title>멈칫 - 소비일기, 사진 가계부</title>
+<meta name="description" content="멈칫은 사진 한 장과 금액, 태그로 남기는 소비 기록 앱이에요. 무료이고 로그인이 없으며, 기록은 휴대폰 안에만 저장해요. 아이폰과 안드로이드에서 쓸 수 있어요.">
+<link rel="canonical" href="https://mumchit.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="멈칫 - 소비일기, 사진 가계부">
+<meta property="og:description" content="사진 한 장과 금액, 태그로 남기는 소비 기록 앱. 무료 · 로그인 없음 · 기록은 휴대폰 안에만.">
+<meta property="og:url" content="https://mumchit.github.io/">
+<meta property="og:locale" content="ko_KR">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "멈칫",
+  "alternateName": ["멈칫 - 소비일기, 사진 가계부", "Mumchit"],
+  "description": "사진 한 장과 금액, 태그로 남기는 소비 기록 앱. 무료이고 로그인이 없으며, 기록은 휴대폰 안에만 저장한다. 날짜별 타임라인과 태그별 사진첩으로 지난 소비를 다시 볼 수 있다.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "iOS, Android",
+  "inLanguage": "ko",
+  "url": "https://mumchit.github.io/",
+  "installUrl": [
+    "https://apps.apple.com/kr/app/id6808496646",
+    "https://play.google.com/store/apps/details?id=com.woobiz.mumchit"
+  ],
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" },
+  "publisher": { "@type": "Organization", "name": "woobiz", "email": "kwakseongjun223@gmail.com" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "멈칫은 어떤 앱인가요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "산 것을 사진 한 장으로 찍고 금액과 태그를 더해 남기는 소비 기록 앱이에요. 날짜별 타임라인과 태그별 사진첩으로 지난 소비를 다시 볼 수 있어요." } },
+    { "@type": "Question", "name": "무료인가요? 광고가 있나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "지금은 모든 기능을 무료로 쓸 수 있고, 광고는 없어요." } },
+    { "@type": "Question", "name": "회원가입이나 로그인이 필요한가요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "필요 없어요. 설치하고 바로 기록할 수 있어요." } },
+    { "@type": "Question", "name": "기록은 어디에 저장되나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "휴대폰 안에만 저장해요. 기록과 사진을 서버로 보내지 않아요." } },
+    { "@type": "Question", "name": "카드나 은행과 연동되나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "연동하지 않아요. 직접 남긴 기록만 보여드려요." } },
+    { "@type": "Question", "name": "휴대폰을 바꾸면 기록을 옮길 수 있나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "설정에서 백업 파일을 만들어 새 휴대폰에서 되돌릴 수 있어요. 사진도 함께 옮겨드려요." } },
+    { "@type": "Question", "name": "더치페이나 할부도 기록할 수 있나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "할 수 있어요. 더치페이로 돌려받은 돈, 할부, 포인트 사용을 함께 남기면 내가 실제로 낸 금액으로 보여드려요." } },
+    { "@type": "Question", "name": "어떤 휴대폰에서 쓸 수 있나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "아이폰(앱스토어)과 안드로이드(구글 플레이)에서 쓸 수 있어요. 지금은 대한민국에서만 내려받을 수 있어요." } }
+  ]
+}
+</script>
 <style>
   :root{ --ink:#1d1d1f; --muted:#6e6e73; --faint:#8e8e93; --green:#3d6b50; --hair:#e6e6ea; --parch:#f7f7f9; }
   *{box-sizing:border-box;}
@@ -15,7 +64,13 @@
   }
   main{max-width:520px; margin:0 auto;}
   h1{font-size:34px; letter-spacing:-1px; margin:0 0 10px;}
-  .tagline{color:var(--muted); font-size:16px; margin:0 0 48px;}
+  h2{font-size:20px; letter-spacing:-0.5px; margin:56px 0 14px;}
+  h3{font-size:16px; letter-spacing:-0.3px; margin:0 0 4px;}
+  p{margin:0;}
+  .tagline{color:var(--muted); font-size:16px; margin:0 0 28px;}
+  .intro{font-size:16px; margin:0 0 24px;}
+  .facts{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 28px; padding:0; list-style:none;}
+  .facts li{background:var(--parch); border-radius:999px; padding:6px 14px; font-size:14px; color:var(--muted);}
   .links{display:flex; flex-direction:column; gap:10px;}
   a.card{
     display:block; text-decoration:none; color:inherit;
@@ -23,11 +78,15 @@
   }
   a.card .t{font-size:16px; font-weight:700; letter-spacing:-0.3px;}
   a.card .d{font-size:13.5px; color:var(--faint); margin-top:2px;}
+  .feature{margin:0 0 18px;}
+  .feature p, .qa p{color:var(--muted); font-size:15px;}
+  .qa{margin:0 0 20px;}
   footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--hair); font-size:13.5px; color:var(--muted);}
   footer a{color:var(--green);}
   @media (prefers-color-scheme: dark){
     body{background:#111113; color:#f2f2f5;}
-    .tagline{color:#a9a9b0;}
+    .tagline, .feature p, .qa p{color:#a9a9b0;}
+    .facts li{background:#1c1c1f; color:#a9a9b0;}
     a.card{background:#1c1c1f;}
     a.card .d{color:#8e8e96;}
     footer{border-top-color:#2c2c31; color:#a9a9b0;}
@@ -38,8 +97,61 @@
 <body>
 <main>
   <h1>멈칫</h1>
-  <p class="tagline">사진으로 남기는 소비 기록</p>
+  <p class="tagline">소비일기, 사진 가계부</p>
 
+  <p class="intro">멈칫은 산 것을 사진 한 장으로 찍고, 금액과 태그를 더해 남기는 소비 기록 앱이에요. 모아 둔 기록은 날짜별 타임라인과 태그별 사진첩으로 다시 볼 수 있어요.</p>
+
+  <ul class="facts">
+    <li>무료</li>
+    <li>광고 없음</li>
+    <li>로그인 없음</li>
+    <li>기록은 휴대폰 안에만</li>
+    <li>아이폰 · 안드로이드</li>
+  </ul>
+
+  <div class="links">
+    <a class="card" href="https://apps.apple.com/kr/app/id6808496646">
+      <div class="t">앱스토어에서 받기</div>
+      <div class="d">아이폰</div>
+    </a>
+    <a class="card" href="https://play.google.com/store/apps/details?id=com.woobiz.mumchit">
+      <div class="t">구글 플레이에서 받기</div>
+      <div class="d">안드로이드</div>
+    </a>
+  </div>
+
+  <h2>멈칫으로 할 수 있는 것</h2>
+  <div class="feature">
+    <h3>사진 한 장으로 남기기</h3>
+    <p>사진, 금액, 태그 하나면 기록이 끝나요. 사진 없이 글로만 남길 수도 있어요.</p>
+  </div>
+  <div class="feature">
+    <h3>세 가지 태그로 나누기</h3>
+    <p>무엇을 샀는지(목적), 어떤 상황이었는지(맥락), 무엇으로 냈는지(지출수단)로 나눠 남길 수 있어요.</p>
+  </div>
+  <div class="feature">
+    <h3>사진첩처럼 다시 보기</h3>
+    <p>날짜별 타임라인으로 보거나, 카페 · 배달처럼 태그별로 모아 앨범처럼 볼 수 있어요.</p>
+  </div>
+  <div class="feature">
+    <h3>더치페이 · 할부 · 포인트</h3>
+    <p>돌려받은 돈과 할부, 포인트 사용을 함께 남기면 내가 실제로 낸 금액으로 보여드려요.</p>
+  </div>
+  <div class="feature">
+    <h3>지출 카드로 저장</h3>
+    <p>기록 한 건을 영수증 모양 카드 이미지로 사진첩에 저장할 수 있어요. 소비일기 블로그에 붙이기 좋아요.</p>
+  </div>
+
+  <h2 id="faq">자주 묻는 질문</h2>
+  <div class="qa"><h3>무료인가요? 광고가 있나요?</h3><p>지금은 모든 기능을 무료로 쓸 수 있고, 광고는 없어요.</p></div>
+  <div class="qa"><h3>회원가입이나 로그인이 필요한가요?</h3><p>필요 없어요. 설치하고 바로 기록할 수 있어요.</p></div>
+  <div class="qa"><h3>기록은 어디에 저장되나요?</h3><p>휴대폰 안에만 저장해요. 기록과 사진을 서버로 보내지 않아요.</p></div>
+  <div class="qa"><h3>카드나 은행과 연동되나요?</h3><p>연동하지 않아요. 직접 남긴 기록만 보여드려요.</p></div>
+  <div class="qa"><h3>휴대폰을 바꾸면 기록을 옮길 수 있나요?</h3><p>설정에서 백업 파일을 만들어 새 휴대폰에서 되돌릴 수 있어요. 사진도 함께 옮겨드려요.</p></div>
+  <div class="qa"><h3>더치페이나 할부도 기록할 수 있나요?</h3><p>할 수 있어요. 더치페이로 돌려받은 돈, 할부, 포인트 사용을 함께 남기면 내가 실제로 낸 금액으로 보여드려요.</p></div>
+  <div class="qa"><h3>어떤 휴대폰에서 쓸 수 있나요?</h3><p>아이폰(앱스토어)과 안드로이드(구글 플레이)에서 쓸 수 있어요. 지금은 대한민국에서만 내려받을 수 있어요.</p></div>
+
+  <h2>약관 · 개인정보</h2>
   <div class="links">
     <a class="card" href="./privacy.html">
       <div class="t">개인정보처리방침</div>
