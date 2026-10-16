@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>멈칫 기록을 AI에게 물어보기</title>
+<meta name="description" content="멈칫에서 내보낸 소비 기록 파일(JSON)을 ChatGPT · Gemini · Claude에 첨부해 내 소비를 물어보는 방법입니다. 파일에 담기는 내용과 그대로 붙여 넣을 수 있는 안내문을 함께 정리했습니다.">
+<link rel="canonical" href="https://mumchit.github.io/ai/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="멈칫 기록을 AI에게 물어보기">
+<meta property="og:description" content="소비 기록 파일(JSON)을 ChatGPT · Gemini · Claude에 첨부해 내 소비를 물어보는 방법.">
+<meta property="og:url" content="https://mumchit.github.io/ai/">
+<meta property="og:locale" content="ko_KR">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "멈칫 기록을 AI에게 물어보기",
+  "description": "소비 기록 앱 멈칫에서 내보낸 JSON 파일을 ChatGPT, Gemini, Claude 같은 AI에 첨부해 내 소비를 분석받는 방법.",
+  "inLanguage": "ko",
+  "tool": [{ "@type": "HowToTool", "name": "멈칫 앱 (아이폰 · 안드로이드)" }, { "@type": "HowToTool", "name": "파일 첨부를 지원하는 AI 서비스" }],
+  "step": [
+    { "@type": "HowToStep", "name": "기록 내보내기", "text": "멈칫 앱의 설정 탭에서 '백업 및 데이터' → '기록 내보내기 (JSON)'을 누릅니다." },
+    { "@type": "HowToStep", "name": "파일 저장 또는 보내기", "text": "공유 창에서 파일로 저장하거나 AI 앱으로 바로 보냅니다. 파일 이름은 '멈칫-기록-분석용-날짜.json'입니다." },
+    { "@type": "HowToStep", "name": "AI에 첨부하고 질문하기", "text": "AI 대화창에 파일을 첨부하고, 파일 읽는 규칙을 담은 안내문과 궁금한 질문을 함께 보냅니다." }
+  ],
+  "about": { "@type": "MobileApplication", "name": "멈칫", "url": "https://mumchit.github.io/" }
+}
+</script>
+<style>
+  :root{ --ink:#1d1d1f; --muted:#6e6e73; --faint:#8e8e93; --green:#3d6b50; --hair:#e6e6ea; --parch:#f7f7f9; --code:#f1f1f4; }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; padding:96px 20px; background:#fff;
+    font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Pretendard','Malgun Gothic',sans-serif;
+    color:var(--ink); line-height:1.72; -webkit-text-size-adjust:100%;
+  }
+  main{max-width:520px; margin:0 auto;}
+  .back{font-size:14px; color:var(--green); text-decoration:none;}
+  h1{font-size:28px; letter-spacing:-0.8px; line-height:1.35; margin:14px 0 12px;}
+  h2{font-size:20px; letter-spacing:-0.5px; margin:52px 0 14px;}
+  h3{font-size:16px; letter-spacing:-0.3px; margin:0 0 4px;}
+  p{margin:0 0 12px;}
+  .lead{font-size:16px; color:var(--muted);}
+  .muted{color:var(--muted); font-size:15px;}
+  ol.steps{margin:0; padding:0; list-style:none; counter-reset:s;}
+  ol.steps li{counter-increment:s; position:relative; padding:0 0 18px 40px;}
+  ol.steps li::before{content:counter(s); position:absolute; left:0; top:1px; width:26px; height:26px; border-radius:50%; background:var(--parch); color:var(--green); font-weight:700; font-size:14px; display:flex; align-items:center; justify-content:center;}
+  ol.steps li p{color:var(--muted); font-size:15px; margin:0;}
+  .box{background:var(--parch); border-radius:14px; padding:16px 18px; margin:0 0 12px;}
+  .copy{display:flex; align-items:flex-end; gap:10px; background:var(--code); border-radius:12px; padding:13px 12px 13px 16px; margin:0 0 10px; font-size:14.5px; line-height:1.7;}
+  .copy .t{flex:1; white-space:pre-wrap; word-break:keep-all; overflow-wrap:anywhere;}
+  .copy button{flex:none; border:0; background:#fff; color:var(--green); font:inherit; font-size:13px; font-weight:600; padding:5px 12px; border-radius:999px; cursor:pointer;}
+  table{width:100%; border-collapse:collapse; font-size:14px; margin:0 0 12px;}
+  th,td{text-align:left; vertical-align:top; padding:9px 6px; border-bottom:1px solid var(--hair);}
+  th{color:var(--faint); font-weight:600; font-size:13px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:0.92em; background:var(--code); padding:1px 5px; border-radius:5px;}
+  table{table-layout:fixed;} th:first-child,td:first-child{width:46%;} td code{font-size:12.5px;} td code{word-break:break-all;}
+  main{overflow-wrap:anywhere;}
+  .qa{margin:0 0 20px;}
+  .qa p{color:var(--muted); font-size:15px; margin:0;}
+  footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--hair); font-size:13.5px; color:var(--muted);}
+  footer a{color:var(--green);}
+  @media (prefers-color-scheme: dark){
+    :root{ --ink:#f2f2f5; --muted:#a9a9b0; --faint:#8e8e96; --green:#8fc0a4; --hair:#2c2c31; --parch:#1c1c1f; --code:#232327; }
+    body{background:#111113;}
+    .copy button{background:#2c2c31;}
+  }
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="../">← 멈칫</a>
+  <h1>멈칫 기록을<br>AI에게 물어보기</h1>
+  <p class="lead">멈칫에 남긴 소비 기록을 파일 하나로 내보내 ChatGPT · Gemini · Claude 같은 AI에 첨부할 수 있습니다. 어떤 상황에서 많이 썼는지, 만족했던 소비와 아쉬웠던 소비는 무엇이 달랐는지 물어볼 수 있습니다.</p>
+
+  <h2>이렇게 합니다</h2>
+  <ol class="steps">
+    <li><h3>기록 내보내기</h3><p>멈칫 앱의 설정 탭에서 <b>백업 및 데이터 → 기록 내보내기 (JSON)</b>을 누릅니다.</p></li>
+    <li><h3>파일 저장 또는 보내기</h3><p>공유 창에서 파일로 저장하거나 AI 앱으로 바로 보냅니다. 파일 이름은 <code>멈칫-기록-분석용-날짜.json</code>입니다.</p></li>
+    <li><h3>AI에 첨부하고 질문하기</h3><p>대화창에 파일을 첨부하고, 아래 안내문을 먼저 붙여 넣은 뒤 궁금한 것을 물어봅니다.</p></li>
+  </ol>
+
+  <h2>먼저 붙여 넣는 안내문</h2>
+  <p class="muted">파일만 첨부하면 AI가 더치페이나 할부를 그대로 더해서 합계가 앱 화면과 다르게 나올 수 있습니다. 이 안내문을 함께 보내면 앱과 같은 방식으로 계산합니다.</p>
+  <div class="copy" id="rules"><span class="t">첨부한 파일은 소비 기록 앱 '멈칫'에서 내보낸 내 기록입니다. 아래 규칙대로 읽어 주세요.
+1. 기록은 records에 있고, 날짜는 date, 금액은 amount입니다.
+2. specialTags에 dutch(더치페이)나 refund(돌려받기)가 있으면 payload.myShare를 내가 실제로 낸 금액으로 봅니다.
+3. excludedFromTotal이 true인 기록은 합계에서 뺍니다.
+4. series.scheduled가 true인 기록은 아직 오지 않은 할부·반복 예정분이라 합계에서 뺍니다.
+5. tags의 id는 tagDefs에서 이름과 갈래(목적·맥락·지출수단)를 찾습니다.
+6. review는 내가 직접 남긴 평가입니다. good은 만족, meh는 아쉬움, skip은 건너뜀입니다.
+7. memo는 그때 내가 남긴 메모입니다.
+</span><button type="button" data-copy="rules">복사</button></div>
+
+  <h2>파일에 담기는 것</h2>
+  <p class="muted">사진은 담기지 않습니다. 휴대폰을 옮길 때 쓰는 백업 파일(사진 포함)과는 다른 파일입니다.</p>
+  <table>
+    <tr><th>항목</th><th>내용</th></tr>
+    <tr><td><code>title</code></td><td>지출 이름</td></tr>
+    <tr><td><code>amount</code></td><td>금액(원)</td></tr>
+    <tr><td><code>date</code></td><td>지출한 날짜</td></tr>
+    <tr><td><code>tags</code></td><td>붙인 태그. 이름은 <code>tagDefs</code>에 있습니다</td></tr>
+    <tr><td><code>memo</code></td><td>메모</td></tr>
+    <tr><td><code>kind</code></td><td>사진으로 남긴 기록(<code>photo</code>)인지, 글로만 남긴 기록(<code>text</code>)인지</td></tr>
+    <tr><td><code>specialTags</code></td><td>더치페이 · 돌려받기 · 할부 · 반복 지출 정보</td></tr>
+    <tr><td><code>series</code></td><td>할부 · 반복 지출의 몇 번째 회차인지</td></tr>
+    <tr><td><code>excludedFromTotal</code></td><td>합계에서 빼기로 한 기록</td></tr>
+    <tr><td><code>review</code></td><td>리캡에서 남긴 만족 · 아쉬움 표시</td></tr>
+  </table>
+
+  <h2>알아 두면 좋은 것</h2>
+  <div class="qa"><h3>파일을 올리면 기록은 어디로 가나요?</h3><p>파일을 첨부하는 순간 그 기록은 해당 AI 서비스로 전송되고, 그 서비스의 개인정보 정책을 따릅니다. 멈칫은 이 과정에 관여하지 않습니다. 메모에 남에게 보이고 싶지 않은 내용이 있다면 올리기 전에 확인할 수 있습니다.</p></div>
+  <div class="qa"><h3>AI가 계산한 합계가 앱과 다릅니다</h3><p>위의 안내문을 함께 보냈는지 확인해 주세요. 그래도 다르다면 "규칙 2~4를 다시 적용해서 계산해 주세요"라고 요청할 수 있습니다.</p></div>
+  <div class="qa"><h3>어떤 AI에서 쓸 수 있나요?</h3><p>파일 첨부를 지원하는 AI라면 쓸 수 있습니다. ChatGPT, Gemini, Claude 모두 JSON 파일을 첨부할 수 있습니다.</p></div>
+
+  <footer>
+    <a href="../">멈칫 - 소비일기, 사진 가계부</a> · 무료 · 로그인 없음 · 기록은 휴대폰 안에만<br>
+    문의 — <a href="mailto:kwakseongjun223@gmail.com">kwakseongjun223@gmail.com</a>
+  </footer>
+</main>
+<script>
+document.querySelectorAll('[data-copy]').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var el = document.getElementById(b.getAttribute('data-copy'));
+    var text = el.querySelector('.t').textContent.trim();
+    function done() { b.textContent = '복사했습니다'; setTimeout(function () { b.textContent = '복사'; }, 1500); }
+    try {
+      if (navigator.clipboard) { navigator.clipboard.writeText(text).then(done, function () {}); }
+    } catch (e) {}
+  });
+});
+</script>
+</body>
+</html>

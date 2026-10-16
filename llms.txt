@@ -7,11 +7,13 @@
 - 다시 보기: 날짜별 타임라인, 태그별 사진첩, 기록을 한 장씩 넘겨 보는 피드
 - 더치페이로 돌려받은 돈 · 할부 · 포인트 사용을 남기면 실제로 낸 금액으로 보여줌
 - 기록 한 건을 영수증 모양 카드 이미지로 저장(소비일기 블로그용)
+- 기록을 JSON 파일로 내보내 ChatGPT · Gemini · Claude 같은 AI에 첨부해 분석받을 수 있음(사진 제외, 파일 읽는 규칙 안내: https://mumchit.github.io/ai/)
 - 카드 · 은행 연동 없음. 백업 파일로 휴대폰을 옮길 수 있음(사진 포함)
 
 ## 링크
 
 - [앱스토어](https://apps.apple.com/kr/app/id6808496646)
 - [구글 플레이](https://play.google.com/store/apps/details?id=com.woobiz.mumchit)
+- [멈칫 기록을 AI에게 물어보기](https://mumchit.github.io/ai/)
 - [자주 묻는 질문](https://mumchit.github.io/#faq)
 - [개인정보처리방침](https://mumchit.github.io/privacy.html)
